@@ -22,6 +22,10 @@ db.connect()
 .then(()=>app.listen(PORT, ()=>{console.log(`listening to port ${PORT}`)}))
 .catch((err)=>{console.log("Error has Occurred server failed to Connect to the postgreSQL database",err)});
 
+app.get('/', function(req, res){
+    res.send('Hello World');
+});
+
 app.use('/posts', postRoutes);
 app.use('/auth', authRoutes);
 export default db;
