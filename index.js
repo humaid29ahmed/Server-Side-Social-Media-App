@@ -4,8 +4,10 @@ import express from "express";
 import cors from "cors";
 import postRoutes from "./routes/post.js";
 import authRoutes from "./routes/auth.js";
+import dns from "dns";
 import 'dotenv/config'
 
+dns.setDefaultResultOrder('ipv4first');
 const app =express();
 app.use(cors());
 app.use(bodyParser.json({limit:"30mb",extended:true}));
@@ -14,7 +16,12 @@ app.use(bodyParser.urlencoded({limit:"30mb",extended:true}));
 
 const CONNECTION_URL = process.env.CONNECTION_URL ;
 
-const db = new pg.Client(CONNECTION_URL);
+const db = new pg.Client({
+  connectionString: CONNECTION_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
 const PORT = process.env.PORT ;
 
 
