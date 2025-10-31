@@ -6,8 +6,6 @@ import postRoutes from "./routes/post.js";
 import authRoutes from "./routes/auth.js";
 import dns from "dns";
 import 'dotenv/config'
-
-dns.setDefaultResultOrder('ipv4first');
 const app =express();
 app.use(cors());
 app.use(bodyParser.json({limit:"30mb",extended:true}));
